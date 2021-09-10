@@ -9,7 +9,7 @@ class ChessPositionDataset(Dataset):
         self.images = os.listdir(img_dir)
         self.transform = transform
         self.target_transform = target_transform
-        
+
     def __len__(self):
         return len(self.images)
 
