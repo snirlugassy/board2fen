@@ -51,6 +51,8 @@ print(f'Validation size: {validation_size}')
 validation_ids = random.sample(range(total_samples), validation_size)
 train_ids = [i for i in range(total_samples) if i not in validation_ids]
 
+print('Using device', device)
+
 model = ChessPositionNet(target_dim=target_dim).to(device)
 
 try:

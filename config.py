@@ -50,10 +50,10 @@ hidden_dim = 50
 dropout_rate = 0.1  
 
 # the % of samples to take from training to validation
-validation_frac = 0.3  
+validation_frac = 0.01  
 
 # number of training iterations
-epochs = 1
+epochs = 10
 
 # the file name to save / load model state dict
 state_file_name = 'trained.model'

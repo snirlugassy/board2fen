@@ -14,4 +14,4 @@ def fen2matrix(y):
             else:
                 _row.append(fen_index[sym])
         output.append(_row)
-    return Tensor(output)
+    return Tensor(output).long()
