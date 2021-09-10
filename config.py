@@ -53,4 +53,7 @@ dropout_rate = 0.1
 validation_frac = 0.3  
 
 # number of training iterations
-epochs = 10 
+epochs = 1
+
+# the file name to save / load model state dict
+state_file_name = 'trained.model'
