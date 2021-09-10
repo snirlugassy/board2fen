@@ -1,7 +1,7 @@
 import os
 from torchvision.io import read_image
 from torch.utils.data import Dataset
-
+from config import device
 
 class ChessPositionDataset(Dataset):
     def __init__(self, img_dir, transform=None, target_transform=None):
@@ -22,4 +22,5 @@ class ChessPositionDataset(Dataset):
             image = self.transform(image)
         if self.target_transform:
             label = self.target_transform(label)
-        return patches/255, label
+        patches = patches / 255
+        return patches.to(device), label.to(device)
