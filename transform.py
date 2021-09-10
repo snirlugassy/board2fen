@@ -1,6 +1,6 @@
 from torchvision import transforms
 
-transform = transforms.Compose([
+transformations = transforms.Compose([
     transforms.ToPILImage(),
     # transforms.RandomCrop((250,250)),
     transforms.ToTensor()
