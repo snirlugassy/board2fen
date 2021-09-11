@@ -18,6 +18,7 @@ from config import device
 from config import validation_frac
 from config import epochs
 from config import state_file_name
+from config import learning_rate
 
 def run_validation(net, data, ids):
     correct = 0
@@ -41,15 +42,17 @@ test_dataloader = DataLoader(test_data, shuffle=True)
 print(f'Loaded {len(train_data)} training samples')
 print(f'Loaded {len(test_data)} test samples')
 
-total_samples = len(train_data)
-train_size = math.floor((1-validation_frac) * total_samples)
-print(f'Train size: {train_size}')
 
-validation_size = total_samples - train_size
-print(f'Validation size: {validation_size}')
+# total_samples = len(train_data)
+# sample_ids = list(range(total_samples))
+# random.shuffle(sample_ids)
+# train_val_split_pos = math.floor(total_samples * validation_frac)
 
-validation_ids = random.sample(range(total_samples), validation_size)
-train_ids = [i for i in range(total_samples) if i not in validation_ids]
+# validation_ids = sample_ids[:train_val_split_pos]
+# print(f'Validation size: {len(validation_ids)}')
+
+# train_ids = sample_ids[train_val_split_pos:]
+# print(f'Train size: {len(train_ids)}')
 
 print('Using device', device)
 
@@ -60,14 +63,34 @@ try:
 except Exception:
     print('No saved state, model state is new')
 
-optimizer = Adam(model.parameters(), lr=0.01)
+optimizer = Adam(model.parameters(), lr=learning_rate)
 loss = nn.CrossEntropyLoss()
 
+# the number of samples to train in each epoch
+total_samples = 2000
+
+# use for training over all samples in each epoch
+# total_samples = len(train_data)
+
+train_val_split_pos = math.floor(total_samples * validation_frac)
+
+print(f'Training samples: {total_samples - train_val_split_pos}')
+print(f'Validation samples: {train_val_split_pos}')
+
 for _e in range(epochs):
+    # randomly choose training and validation indices
+    sample_ids = list(range(total_samples))
+    random.shuffle(sample_ids)
+    validation_ids = sample_ids[:train_val_split_pos]
+    train_ids = sample_ids[train_val_split_pos:]
+
     start_time = datetime.now().timestamp()
     epoch_loss = 0.0
     print(f'Epoch: {_e+1}/{epochs}')
+    count = 0
     for k in train_ids:
+        count += 1
+        print(f'{count}/{len(train_ids)}',end='\r')
         board, labels = train_data[k]
         board_loss = 0.0
         for i in range(8):

@@ -22,6 +22,9 @@ fen_index = {
 # the number of possible target labels
 target_dim = len(fen_index.keys()) + 1  
 
+# optimizer learning rate
+learning_rate = 0.01
+
 # number of input channel - RGB
 channels = 3  
 
