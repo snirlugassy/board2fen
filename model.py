@@ -31,5 +31,4 @@ class ChessPositionNet(Module):
         x = relu(self.conv2(x))
         x = flatten(x, 1) # flatten all dimensions except batch
         x = relu(self.fc1(x))
-        # return self.log_softmax(self.fc2(x)).reshape(TARGET_DIM)
         return self.fc2(x)

@@ -35,33 +35,17 @@ print('-- TRAINING --')
 
 # Datasets
 train_data = ChessPositionDataset(img_dir='dataset/train', transform=transformations, target_transform=fen2matrix)
-test_data = ChessPositionDataset(img_dir='dataset/test', transform=transformations, target_transform=fen2matrix)
 
 # Dataloaders
 train_dataloader = DataLoader(train_data, shuffle=True)
-test_dataloader = DataLoader(test_data, shuffle=True)
 
 print(f'Loaded {len(train_data)} training samples')
-print(f'Loaded {len(test_data)} test samples')
-
-
-# total_samples = len(train_data)
-# sample_ids = list(range(total_samples))
-# random.shuffle(sample_ids)
-# train_val_split_pos = math.floor(total_samples * validation_frac)
-
-# validation_ids = sample_ids[:train_val_split_pos]
-# print(f'Validation size: {len(validation_ids)}')
-
-# train_ids = sample_ids[train_val_split_pos:]
-# print(f'Train size: {len(train_ids)}')
 
 print('Using device', device)
-
 model = ChessPositionNet(target_dim=target_dim).to(device)
 
 try:
-    model.load_state_dict(torch.load(state_file_name))
+    model.load_state_dict(torch.load(state_file_name, map_location=device))
 except Exception:
     print('No saved state, model state is new')
 
