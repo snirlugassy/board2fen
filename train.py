@@ -31,6 +31,8 @@ def run_validation(net, data, ids):
                 correct += int(_y == predicted)
     return correct / (len(ids) * 8 * 8)
 
+print('-- TRAINING --')
+
 # Datasets
 train_data = ChessPositionDataset(img_dir='dataset/train', transform=transformations, target_transform=fen2matrix)
 test_data = ChessPositionDataset(img_dir='dataset/test', transform=transformations, target_transform=fen2matrix)

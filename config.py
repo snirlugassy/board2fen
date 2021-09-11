@@ -23,7 +23,7 @@ fen_index = {
 target_dim = len(fen_index.keys()) + 1  
 
 # optimizer learning rate
-learning_rate = 0.01
+learning_rate = 0.005
 
 # number of input channel - RGB
 channels = 3  
@@ -53,10 +53,10 @@ hidden_dim = 50
 dropout_rate = 0.1  
 
 # the % of samples to take from training to validation
-validation_frac = 0.01  
+validation_frac = 0.07
 
 # number of training iterations
-epochs = 10
+epochs = 20
 
 # the file name to save / load model state dict
 state_file_name = 'trained.model'
