@@ -18,7 +18,6 @@ class ChessPositionNet(Module):
         self.conv2 = Conv2d(num_of_filters, num_of_filters, kernel_size=filter_size, stride=stride)
         self.fc1 = Linear(flat_layer_size, hidden_dim)
         self.fc2 = Linear(hidden_dim, target_dim)
-        self.log_softmax = LogSoftmax(dim=1)
 
     def forward(self, x):
         """

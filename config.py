@@ -35,7 +35,7 @@ idx_piece = {
 }
 
 # the number of possible target labels
-target_dim = len(piece_idx.keys()) + 1  
+target_dim = len(piece_idx.keys()) + 1
 
 # optimizer learning rate
 learning_rate = 0.005
@@ -56,7 +56,7 @@ num_of_filters = 12
 filter_size = 4  
 
 # convolution filter stride
-stride = 1  
+stride = 1
 
 # the size of the flat layer after the conv layers
 flat_layer_size = num_of_filters * (50-2*(filter_size-1))**2 
