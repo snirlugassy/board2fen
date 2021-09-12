@@ -34,7 +34,7 @@ def run_validation(net, data, ids):
 print('-- TRAINING --')
 
 # Datasets
-train_data = ChessPositionDataset(img_dir='dataset/train', transform=transformations, target_transform=fen2matrix)
+train_data = ChessPositionDataset(img_dir='dataset/train', target_transform=fen2matrix)
 
 # Dataloaders
 train_dataloader = DataLoader(train_data, shuffle=True)
@@ -58,6 +58,7 @@ total_samples = 2000
 # use for training over all samples in each epoch
 # total_samples = len(train_data)
 
+train_ids = list(range(len(train_data)))
 train_val_split_pos = math.floor(total_samples * validation_frac)
 
 print(f'Training samples: {total_samples - train_val_split_pos}')
@@ -65,8 +66,7 @@ print(f'Validation samples: {train_val_split_pos}')
 
 for _e in range(epochs):
     # randomly choose training and validation indices
-    sample_ids = list(range(total_samples))
-    random.shuffle(sample_ids)
+    sample_ids = random.sample(train_ids, total_samples)
     validation_ids = sample_ids[:train_val_split_pos]
     train_ids = sample_ids[train_val_split_pos:]
 

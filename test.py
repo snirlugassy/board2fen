@@ -23,7 +23,7 @@ def hamming_distance(s1, s2):
 
 def run_test():
     # Datasets
-    test_data = ChessPositionDataset(img_dir='dataset/test', transform=transformations, target_transform=fen2matrix)
+    test_data = ChessPositionDataset(img_dir='dataset/test', target_transform=fen2matrix)
     print(f'Testing over {len(test_data)} samples')
 
     print('Using device', device)
@@ -34,8 +34,6 @@ def run_test():
     count = 0
     distances = []
     for board, labels in test_data:
-        if count > 1000:
-            break
         fen = matrix2fen(labels)
         predicted = torch.zeros_like(labels)
         count += 1
@@ -53,6 +51,7 @@ def run_test():
 
     print(Counter(distances))
     # plt.hist(distances, bins=64)
+    # plt.title('Output Hamming Distance Histogram')
     # plt.show()
 
     return accuracy
