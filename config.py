@@ -4,7 +4,7 @@ import torch
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 # the convertion from chess piece in FEN to label
-fen_index = {
+piece_idx = {
     "q": 1,
     "k": 2,
     "p": 3,
@@ -19,8 +19,23 @@ fen_index = {
     "R": 12
 }
 
+idx_piece = {
+    1: "q",
+    2: "k",
+    3: "p",
+    4: "n",
+    5: "b",
+    6: "r",
+    7: "Q",
+    8: "K",
+    9: "P",
+    10: "N",
+    11: "B",
+    12: "R"
+}
+
 # the number of possible target labels
-target_dim = len(fen_index.keys()) + 1  
+target_dim = len(piece_idx.keys()) + 1  
 
 # optimizer learning rate
 learning_rate = 0.005
